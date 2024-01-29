@@ -1,0 +1,20 @@
+role: Agent
+agentConfig: 
+  data_dir: /vector-data-dir
+
+  sources:
+    k8_logs:
+      type: kubernetes_logs
+
+  sinks:
+    axiom_sink:
+      type: axiom
+      inputs:
+        - k8_logs
+      dataset: <DATASET_NAME>
+      token: <API_KEY>
+    stdout:
+      type: console
+      inputs: [k8_logs]
+      encoding:
+        codec: json
